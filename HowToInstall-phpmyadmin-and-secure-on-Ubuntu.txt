@@ -1,0 +1,26 @@
+1 Install PhpMyAdmin on your Linux Server
+sudo apt-get update
+sudo apt-get install phpmyadmin
+
+2 Create a symbolic link for phpmyadmin
+
+sudo ln -s /usr/share/phpmyadmin /var/www/html
+sudo phpenmod mcrypt
+sudo service php7.0-fpm restart
+
+3 Change to webdirectory of Nginx
+cd /var/www/html
+
+4 Restrict Admin login
+openssl passwd
+sudo nano /etc/nginx/pmapass
+corehqneok:Zbf4Tbd5ds
+
+sudo nano /etc/nginx/sites-available/default
+
+    location /phpmyadmin {
+        auth_basic "PhpMyAdmin Admin Login";
+        auth_basic_user_file /etc/nginx/pmapass;
+    }
+
+sudo service nginx restart
